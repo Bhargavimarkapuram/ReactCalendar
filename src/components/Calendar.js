@@ -11,7 +11,7 @@ function Calendar({ events, addEvent, deleteEvent }) {
   const [showEventForm, setShowEventForm] = useState(false);
   const [selectedEventDate, setSelectedEventDate] = useState(null); // Track selected date for event
 
-  // Handle previous month change
+  
   const handlePrevMonth = () => {
     const newDate = subMonths(selectedDate, 1);
     setSelectedDate(newDate);
@@ -19,7 +19,7 @@ function Calendar({ events, addEvent, deleteEvent }) {
     setCurrentYear(format(newDate, "yyyy"));
   };
 
-  // Handle next month change
+  
   const handleNextMonth = () => {
     const newDate = addMonths(selectedDate, 1);
     setSelectedDate(newDate);
@@ -27,19 +27,19 @@ function Calendar({ events, addEvent, deleteEvent }) {
     setCurrentYear(format(newDate, "yyyy"));
   };
 
-  // Generate the days for the current month
+ 
   const generateMonthView = () => {
     const firstDayOfMonth = startOfMonth(selectedDate);
     const daysInMonth = getDaysInMonth(selectedDate);
     const startDay = getDay(firstDayOfMonth);
     const days = [];
 
-    // Fill leading empty days for the first week
+    
     for (let i = 0; i < startDay; i++) {
       days.push(null);
     }
 
-    // Fill in the actual days
+    
     for (let day = 1; day <= daysInMonth; day++) {
       days.push(day);
     }
@@ -47,28 +47,28 @@ function Calendar({ events, addEvent, deleteEvent }) {
     return days;
   };
 
-  // Handle the date click to open the event form
+  
   const handleDateClick = (day) => {
     if (day) {
       const newDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), day);
       setSelectedDate(newDate);
-      setSelectedEventDate(newDate); // Track selected date for event
+      setSelectedEventDate(newDate); 
       setShowEventForm(true);
     }
   };
 
-  // Add event to the events list
+  
   const handleAddEvent = () => {
     if (eventTitle.trim() && eventDescription.trim()) {
       addEvent({ title: eventTitle, description: eventDescription, date: selectedDate });
       setEventTitle("");
       setEventDescription("");
       setShowEventForm(false);
-      setSelectedEventDate(null); // Clear the selected event date
+      setSelectedEventDate(null); 
     }
   };
 
-  // Delete event for the selected date
+  
   const handleDeleteEvent = () => {
     if (selectedEventDate) {
       const eventToDelete = events.find((event) =>
@@ -76,29 +76,29 @@ function Calendar({ events, addEvent, deleteEvent }) {
       );
 
       if (eventToDelete) {
-        deleteEvent(eventToDelete); // Pass the entire event object to delete
+        deleteEvent(eventToDelete); 
         setShowEventForm(false);
-        setSelectedEventDate(null); // Clear selected date
+        setSelectedEventDate(null); 
       }
     }
   };
 
-  // Cancel event form
+
   const handleCancelEvent = () => {
     setEventTitle("");
     setEventDescription("");
     setShowEventForm(false);
-    setSelectedEventDate(null); // Clear selected date
+    setSelectedEventDate(null); 
   };
 
-  // Check if a date has an event
+  
   const hasEvent = (day) => {
     return events.some((event) =>
       event.date.getDate() === day && event.date.getMonth() === selectedDate.getMonth() && event.date.getFullYear() === selectedDate.getFullYear()
     );
   };
 
-  // Get events for a specific date
+ 
   const getEventForDate = (day) => {
     return events.filter((event) =>
       event.date.getDate() === day && event.date.getMonth() === selectedDate.getMonth()
