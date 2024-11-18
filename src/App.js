@@ -10,9 +10,9 @@ function App() {
   };
 
   const deleteEvent = (eventToDelete) => {
-    setEvents((prevEvents) => prevEvents.filter(event => event.id !== eventToDelete.id));
+    const updatedEvents = events.filter((event) => event !== eventToDelete);
+    setEvents(updatedEvents);  
   };
-  
   return (
     <div className="app">
       <h1>React Calendar</h1>

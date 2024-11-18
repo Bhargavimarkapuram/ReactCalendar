@@ -9,7 +9,7 @@ function Calendar({ events, addEvent, deleteEvent }) {
   const [currentMonth, setCurrentMonth] = useState(format(selectedDate, "MMMM"));
   const [currentYear, setCurrentYear] = useState(format(selectedDate, "yyyy"));
   const [showEventForm, setShowEventForm] = useState(false);
-  const [selectedEventDate, setSelectedEventDate] = useState(null); // Track selected date for event
+  const [selectedEventDate, setSelectedEventDate] = useState(null); 
 
   
   const handlePrevMonth = () => {
@@ -69,19 +69,23 @@ function Calendar({ events, addEvent, deleteEvent }) {
   };
 
   
-  const handleDeleteEvent = () => {
-    if (selectedEventDate) {
-      const eventToDelete = events.find((event) =>
-        event.date.toDateString() === selectedEventDate.toDateString()
-      );
+  
+const handleDeleteEvent = () => {
+  if (selectedEventDate) {
+    
+    const eventToDelete = events.find((event) =>
+      event.date.toDateString() === selectedEventDate.toDateString()
+    );
 
-      if (eventToDelete) {
-        deleteEvent(eventToDelete); 
-        setShowEventForm(false);
-        setSelectedEventDate(null); 
-      }
+    if (eventToDelete) {
+      
+      deleteEvent(eventToDelete); 
+      setShowEventForm(false);
+      setSelectedEventDate(null); 
     }
-  };
+  }
+};
+
 
 
   const handleCancelEvent = () => {
